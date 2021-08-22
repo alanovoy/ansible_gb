@@ -1,0 +1,22 @@
+---
+- name: Rollaut nexus from docker
+  hosts: nexus
+  become: true
+  vars:
+    ansible_python_interpreter: /usr/bin/python3
+
+  tasks:
+  - name: docker pull
+    docker_image:
+      name: gdpingva/mynexus
+
+
+  - name: Create a nexus container
+    community.docker.docker_container:
+      name: nexus
+      image: gdpingva/mynexus
+      state: started
+      restart: yes
+      ports:
+      - 8081:8081
+      - 8123:8123

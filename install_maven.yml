@@ -1,0 +1,18 @@
+---
+
+- name: docker install
+  hosts: maven
+  remote_user: alanovoy
+  become: yes
+
+  tasks:
+   - name: install python and docker
+     yum:
+       name: maven
+
+   - name: copy hosts
+     ansible.builtin.copy:
+       src:   /Users/alanovoy/ansible-project/hosts
+       dest:  /etc/
+       owner: root
+       mode:  '644'

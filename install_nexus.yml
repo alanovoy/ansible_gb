@@ -1,0 +1,52 @@
+---
+- name: Rollaut nexus from docker
+  hosts: nexus
+  become: true
+  vars:
+    ansible_python_interpreter: /usr/bin/python3
+    pwd : null
+
+  tasks:
+
+  - name: Create a nexus container
+    community.docker.docker_container:
+      name: nexus
+      image: sonatype/nexus3
+
+      state: started
+      restart: yes
+      ports:
+      - 8081:8081
+      - 8123:8123
+
+
+  - name: pause
+    command: "sleep 60"
+
+#  - name: cat nexus password
+#    community.docker.docker_container_exec:
+#      container: nexus
+#      command: /bin/bash -c "cat /nexus-data/admin.password"
+#    register: nexpass
+#
+#  - name: print password
+#    debug:
+#      var: nexpass.stdout
+
+
+  - name: copy crutch
+    ansible.builtin.copy:
+      src:   /Users/alanovoy/ansible-project/change_password.sh
+      dest:  /home/alanovoy
+      owner: root
+      mode:  '0755'
+
+  - name: copy hosts
+    ansible.builtin.copy:
+      src:   /Users/alanovoy/ansible-project/hosts
+      dest:  /etc/
+      owner: root
+      mode:  '644'
+
+  - name: run crutch
+    command: /home/alanovoy/change_password.sh

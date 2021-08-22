@@ -1,0 +1,6 @@
+[jenkins]
+34.141.101.102   env=jenkins
+[nexus]
+34.89.138.62   env=nexus
+[maven]
+34.89.144.14   env=maven

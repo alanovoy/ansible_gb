@@ -1,0 +1,52 @@
+---
+- name: Rollaut nexus from docker
+  hosts: jenkins
+  become: true
+  vars:
+    ansible_python_interpreter: /usr/bin/python3
+    pwd : null
+
+  tasks:
+
+  - name: install rsync
+    yum:
+      name: rsync
+
+
+  - name: copy dirs
+    ansible.posix.synchronize:
+      src: work/
+      dest: /home/alanovoy/
+
+
+  - name: copy hosts
+    ansible.builtin.copy:
+      src:   /Users/alanovoy/ansible-project/hosts
+      dest:  /etc/
+      owner: root
+      mode:  '644'
+
+  - name: selinux off
+    shell:
+      cmd: "setenforce 0"
+
+  - name: chmod data/jenkins
+    shell:
+      cmd: "chmod -R 755 /home/alanovoy/data/jenkins"
+
+  - name: chown data/jenkins
+    shell:
+      cmd: "chown -R 1000:1000 /home/alanovoy/data/jenkins"
+
+  - name: pull jenkins image
+    shell:
+      cmd: "docker pull jenkins:2.32.1"
+
+  - name: start docker compose
+    shell:
+      cmd: "docker-compose -f /home/alanovoy/docker-compose.yml up -d"
+
+#  - name: run docker-compose
+#    docker_compose :
+#     project_src: /home/alanovoy/data
+#     files: docker_compose.yml

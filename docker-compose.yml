@@ -1,0 +1,24 @@
+version: '2'
+services:
+  nginx:
+    image: nginx:latest
+    ports:
+      - "8080:80"
+    volumes:
+      - /home/alanovoy/data/nginx:/etc/nginx/conf.d
+    container_name: nginx
+    networks:
+      - napp
+  jenkins:
+    image: jenkins/jenkins:latest
+    ports:
+      - 80:8080
+      - 50000:50000
+    volumes:
+      - ./jenkins:/var/jenkins/home
+    container_name: jenkins
+    networks:
+      - napp
+networks:
+  napp:
+    driver: bridge

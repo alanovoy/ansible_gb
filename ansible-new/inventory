@@ -1,0 +1,4 @@
+[jenkins]
+34.107.20.180   env=jenkins
+[nexus]
+35.198.177.10#   env=nexus

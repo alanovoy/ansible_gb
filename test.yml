@@ -1,0 +1,16 @@
+---
+- name: Rollaut nexus from docker
+  hosts: nexus
+  become: true
+  vars:
+    ansible_python_interpreter: /usr/bin/python3
+    pwd : null
+
+  tasks:
+
+  - name: get password
+    command: "pwd=$(duocker exec -it nexus cat /nexus-data/admin.password)"
+
+  - name: print password
+    debug:
+      var: pwd

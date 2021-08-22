@@ -1,0 +1,1 @@
+ssh -o StrictHostKeyChecking=no -i /var/lib/jenkins/id_rsa  alex@192.168.0.69 'cd /home/alex/pet/pet_clinic; cp pom.env pom.xml; MYVER="2.4.5"; echo "<version>"$MYVER"</version>">>pom.xml; echo "</project>">>pom.xml; mvn clean deploy'

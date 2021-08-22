@@ -1,0 +1,21 @@
+Started by user [8mha:////4PuwRAKA4DBdyl6MKWce96E0Sib0uScJuSaIFs0gmIxqAAAAlh+LCAAAAAAAAP9b85aBtbiIQTGjNKU4P08vOT+vOD8nVc83PyU1x6OyILUoJzMv2y+/JJUBAhiZGBgqihhk0NSjKDWzXb3RdlLBUSYGJk8GtpzUvPSSDB8G5tKinBIGIZ+sxLJE/ZzEvHT94JKizLx0a6BxUmjGOUNodHsLgAyWEgYu/dLi1CL9ovz8EgDKVWzSvwAAAA==[0malex
+Running as SYSTEM
+Building in workspace /var/lib/jenkins/workspace/maven1
+[maven1] $ /bin/sh -xe /tmp/jenkins7278523161917782444.sh
++ ssh -o StrictHostKeyChecking=no -i /var/lib/jenkins/id_rsa alex@192.168.0.69 'cd /home/alex/pet/pet_clinic; cp pom.env pom.xml; MYVER='\''2.4.5'\''; echo '\''<version>'\'''\''</version>'\''>>pom.xml; echo '\''</project>'\''>>pom.xml; mvn clean deploy'
+[INFO] Scanning for projects...
+[ERROR] [ERROR] Some problems were encountered while processing the POMs:
+[ERROR] 'version' is missing. @ org.springframework.samples:spring-petclinic:[unknown-version], /home/alex/pet/pet_clinic/pom.xml, line 401, column 10
+ @ 
+[ERROR] The build could not read 1 project -> [Help 1]
+[ERROR]   
+[ERROR]   The project org.springframework.samples:spring-petclinic: (/home/alex/pet/pet_clinic/pom.xml) has 1 error
+[ERROR]     'version' is missing. @ org.springframework.samples:spring-petclinic:[unknown-version], /home/alex/pet/pet_clinic/pom.xml, line 401, column 10
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/ProjectBuildingException
+Build step 'Execute shell' marked build as failure
+Finished: FAILURE

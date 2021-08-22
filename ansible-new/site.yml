@@ -1,0 +1,10 @@
+---
+
+- hosts: all
+  remote_user: alanovoy
+  become: yes
+  
+  roles:
+    - common
+    - jenkins
+    - nexus

@@ -1,0 +1,12 @@
+Started by user [8mha:////4PuwRAKA4DBdyl6MKWce96E0Sib0uScJuSaIFs0gmIxqAAAAlh+LCAAAAAAAAP9b85aBtbiIQTGjNKU4P08vOT+vOD8nVc83PyU1x6OyILUoJzMv2y+/JJUBAhiZGBgqihhk0NSjKDWzXb3RdlLBUSYGJk8GtpzUvPSSDB8G5tKinBIGIZ+sxLJE/ZzEvHT94JKizLx0a6BxUmjGOUNodHsLgAyWEgYu/dLi1CL9ovz8EgDKVWzSvwAAAA==[0malex
+Running as SYSTEM
+Building in workspace /var/lib/jenkins/workspace/maven1
+[maven1] $ /bin/sh -xe /tmp/jenkins17973511181559372946.sh
++ ssh -o StrictHostKeyChecking=no -i /var/lib/jenkins/id_rsa alex@192.168.0.69 uptime
+Warning: Permanently added '192.168.0.69' (ECDSA) to the list of known hosts.
+Load key "/var/lib/jenkins/id_rsa": Permission denied
+Permission denied, please try again.
+Permission denied, please try again.
+alex@192.168.0.69: Permission denied (publickey,gssapi-keyex,gssapi-with-mic,password).
+Build step 'Execute shell' marked build as failure
+Finished: FAILURE

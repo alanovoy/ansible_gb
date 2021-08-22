@@ -1,0 +1,23 @@
+version: '2'
+services:
+  nginx:
+    image: nginx:1.17-alpine
+    container_name: nginx
+    ports:
+      - "80:80"
+    volumes:
+      - ./data/nginx:/etc/nginx/conf.d
+      - ./data/html:/etc/nginx/html
+    networks:
+      - napp
+  jenkins:
+    image: "jenkins/jenkins:lts"
+    container_name: jenkins
+    expose:
+      - "8080"
+      - "50000:50000"
+    networks:
+      - napp
+networks:
+  napp:
+    driver: host

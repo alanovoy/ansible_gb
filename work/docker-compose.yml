@@ -1,0 +1,30 @@
+
+version: '3.8'
+services:
+   nginx:
+     container_name: nginx-jenkins 
+     image: nginx:1.20-alpine
+     ports:
+       - "80:80"
+     volumes:
+       - ./data/nginx:/etc/nginx/conf.d
+       - ./data/html:/var/log/nginx
+       - ./data/logs:/var/log/nginx/jenkins
+     restart: always
+     environment:
+       TZ: Europe/Kyiv
+   jenkins:
+     depends_on:
+       - nginx
+     build:
+       context: .
+       dockerfile: Dockerfile
+     ports:
+       - "8080"
+     container_name: jenkins
+     environment:
+       TZ: Europe/Kyiv
+       JAVA_OPTS: "-Djenkins.install.runSetupWizard=false"
+     volumes:
+       - ./data/jenkins:/var/jenkins_home
+

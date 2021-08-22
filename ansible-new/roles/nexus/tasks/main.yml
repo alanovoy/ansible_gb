@@ -1,0 +1,12 @@
+---
+
+- name: Create a nexus container
+  docker_container:
+    name: mynexus
+    image: gdpingva/mynexus
+    state: started
+    restart: yes
+    ports:
+      - 8081:8081
+      - 8123:8123
+  when: env=="nexus"

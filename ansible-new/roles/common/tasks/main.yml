@@ -1,0 +1,53 @@
+---
+# tasks file for common
+
+- name: Upgrade all packages
+  yum: name=* state=latest
+
+
+- name: Download the Docker installer
+  get_url:
+     url: https://get.docker.com/
+     dest: /root/install_docker.sh
+     mode: 0700
+
+- name: Install python3
+  yum:
+    name: python3, python3-pip, python-pip
+    state: present
+
+- name: install docker sdk
+  command: "pip3 install docker-py"
+- name: install docker sdk old
+  command: "pip install docker docker-py six"
+
+
+
+
+- name: Install Docker
+  shell: /root/install_docker.sh
+
+- name: Remove the Docker installer file.
+  file:
+    state: absent
+    path: /root/install_docker.sh
+
+- name: Enable the Docker daemon in systemd
+  systemd:
+    name: docker
+    enabled: yes
+    masked: no
+
+- name: Start the Docker daemon
+  systemd:
+    name: docker
+    state: started
+    masked: no
+
+
+- name: Download and install Docker Compose
+  get_url:
+    url: https://github.com/docker/compose/releases/download/1.29.2/docker-compose-Linux-x86_64
+    dest: /usr/bin/docker-compose
+    mode: 0755
+

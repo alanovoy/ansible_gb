@@ -1,0 +1,43 @@
+---
+
+- name: docker install
+  hosts: all
+  remote_user: alanovoy
+  become: yes
+
+  tasks:
+   - name: install python and docker
+     yum:
+       name: python3, python-pip, python3-pip, yum-utils, python-docker, unzip
+
+   - name: install dependensis
+     command: "pip3 install docker six requests"
+
+   - name: add docker repo
+     get_url:
+       url: https://download.docker.com/linux/centos/docker-ce.repo
+       dest: /etc/yum.repos.d/docker-ce.repo
+
+   - name: install docker
+     yum:
+       name : docker-ce
+       state: present
+
+   - name: start docker
+     service: name=docker state=started enabled=yes
+
+   - name: install terraform
+     unarchive:
+        src: https://releases.hashicorp.com/terraform/0.12.2/terraform_0.12.2_linux_amd64.zip
+        dest: /usr/bin
+        remote_src: true
+
+   - name: install Docker Compose
+     get_url:
+       url: https://github.com/docker/compose/releases/download/1.26.2/docker-compose-Linux-x86_64
+       dest: /usr/bin/docker-compose
+       mode: 0755
+
+- include : install_nexus.yml
+- include : install_jenkins.yml
+- include : install_maven.yml
